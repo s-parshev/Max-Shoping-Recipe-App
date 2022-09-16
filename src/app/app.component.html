@@ -1,7 +1,7 @@
-<app-header></app-header>
-<div class="container">
+<app-header (showIdentificator)="whoToDisplay($event)" (recipeSelected)="recipeSelectedHandler($event)" ></app-header>
+<div class="container" >
   <div class="row">
-    <app-recipe></app-recipe>
-    <app-shoping></app-shoping>
+    <app-recipe *ngIf="showComponent==='recipe'"></app-recipe>
+    <app-shoping *ngIf="showComponent==='shoping'"></app-shoping>
   </div>
 </div>
