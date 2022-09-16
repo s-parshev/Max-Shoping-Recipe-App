@@ -15,4 +15,11 @@ export class ShopingListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  reciveIngredient(event:any){
+    console.log(typeof(event[1]));
+    let tempIngredientName = event[0];
+    let tempIngredientAmount = event[1];
+    this.ingredients.push(new Ingredient(tempIngredientName, tempIngredientAmount));
+  }
 }
