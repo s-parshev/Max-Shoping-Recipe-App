@@ -9,7 +9,6 @@
     <app-recipe-item 
     *ngFor="let recipe of recipes" 
     [recipeToChild]="recipe"
-    (recipeSelected)="resendDataToParent(recipe)"
     ></app-recipe-item>
   </div>
 </div>
