@@ -16,6 +16,7 @@ import { ShopingServices } from './shoping/shoping.services';
 import { RouterModule } from '@angular/router';
 
 const appRoute=[
+  // {path:'', redirectTo:'/recipe'},
   {path:'shoping', component:ShopingComponent},
   {path:'recipe', component:RecipeComponent},
 ]
@@ -35,6 +36,7 @@ const appRoute=[
   ],
   imports: [
     BrowserModule,
+    // RouterModule
     RouterModule.forRoot(appRoute),
   ],
   providers: [ShopingServices],
