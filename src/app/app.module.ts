@@ -13,7 +13,12 @@ import { ShopingEditComponent } from './shoping/shoping-edit/shoping-edit.compon
 import { DropdownDirective } from './directive/dropdown.directive';
 import { FontSize } from './directive/fontsize.directive';
 import { ShopingServices } from './shoping/shoping.services';
+import { RouterModule } from '@angular/router';
 
+const appRoute=[
+  {path:'shoping', component:ShopingComponent},
+  {path:'recipe', component:RecipeComponent},
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +34,8 @@ import { ShopingServices } from './shoping/shoping.services';
     FontSize
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoute),
   ],
   providers: [ShopingServices],
   bootstrap: [AppComponent]
