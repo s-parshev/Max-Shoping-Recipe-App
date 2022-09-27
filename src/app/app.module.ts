@@ -14,11 +14,15 @@ import { DropdownDirective } from './directive/dropdown.directive';
 import { FontSize } from './directive/fontsize.directive';
 import { ShopingServices } from './shoping/shoping.services';
 import { RouterModule } from '@angular/router';
+import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
 
 const appRoute=[
   // {path:'', redirectTo:'/recipe'},
   {path:'shoping', component:ShopingComponent},
-  {path:'recipe', component:RecipeComponent},
+  {path:'recipe', component:RecipeComponent, children:[
+    {path:'', component: RecipeStartComponent},
+    {path:':id', component:RecipeDetailComponent}
+  ]},
 ]
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ const appRoute=[
     ShopingListComponent,
     ShopingEditComponent,
     DropdownDirective,
-    FontSize
+    FontSize,
+    RecipeStartComponent
   ],
   imports: [
     BrowserModule,
