@@ -1,1 +1,78 @@
-<p>recipe-edit works!</p>
+<form (ngSubmit)="onSubmit()" #formSubmit="ngForm">
+  <div class="row">
+    <div class="col-xl-12">
+      <button (click)="onSaveItem()" type="button" class="btn btn-success">save</button>
+      <button type="button" class="btn btn-danger">cancel</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="name">name</label>
+        <input 
+        type="text" 
+        id="name" 
+        class="form-control" 
+        [ngModel]="name"
+        name="name"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="pathName">image url</label>
+        <input 
+        type="text" 
+        id="imagePath" 
+        class="form-control" 
+        [ngModel]="imagePath"
+        name="imagePath"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <img src="" alt="" class="img-responsive" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="description">description</label>
+        <textarea 
+        type="text" 
+        id="description" 
+        rows="6" 
+        class="form-control"
+        [ngModel]="description"
+        name="description">
+        </textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row" >
+        <div class="col-xs-8">
+          <input 
+          type="text" 
+          class="form-control" 
+          ngModel
+          name="ingredientName"/>
+        </div>
+        <div class="col-xs-2">
+          <input 
+          type="number" 
+          class="form-control" 
+          ngModel
+          name="ingredientAmount"/>
+        </div>
+        <div class="col-xs-2">
+          <button class="btn btn-danger" type="submit">delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
