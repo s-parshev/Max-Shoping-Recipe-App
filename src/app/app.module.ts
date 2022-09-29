@@ -16,6 +16,7 @@ import { ShopingServices } from './shoping/shoping.services';
 import { RouterModule } from '@angular/router';
 import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoute=[
   // {path:'', redirectTo:'/recipe'},
@@ -46,6 +47,7 @@ const appRoute=[
   imports: [
     BrowserModule,
     // RouterModule
+    FormsModule,
     RouterModule.forRoot(appRoute),
   ],
   providers: [ShopingServices],
