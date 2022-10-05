@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
+import {
+  FormBuilder,
+  FormArray,
+  FormControl,
+  FormGroup,
+  NgForm,
+} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { Recipe } from '../recipe-list/recipe-model';
@@ -15,40 +21,71 @@ export class RecipeEditComponent implements OnInit {
   id!: number;
   editMode: boolean = false;
   recipeForm!: FormGroup;
-  recipe!:Recipe;
-  name!:string;
-  imagePath!:string;
-  description!:string;
-  ingredientName!:string;
-  ingredientAmount!:number;
-  ingredients!:Ingredient[];
+  recipe!: Recipe;
+  name!: string;
+  imagePath!: string;
+  description!: string;
+  ingredientName!: string;
+  ingredientAmount!: number;
+  ingredients!: Ingredient[];
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeServices
+    private recipeService: RecipeServices,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.editMode = params['id'] != null;
-     
       this.initForm();
     });
   }
+  newIngredientCtrl(ing: any) {
+    return this.fb.group({
+      name: new FormControl(ing.name),
+      amount: new FormControl(ing.amount),
+    });
+  }
+  get controls() {
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;
+  }
   private initForm() {
-    if(this.editMode){
-      this.recipe = this.recipeService.getRecipe(this.id)
-      this.name = this.recipe.name;
-      this.imagePath = this.recipe .imagePath;
-      this.description = this.recipe.description;
-      this.ingredientName = this.recipe.ingredients[this.id].name;
-      this.ingredientAmount = this.recipe.ingredients[this.id].amount;
+    let recipeName = '';
+    let recipeImagePath = '';
+    let recipeDescription = '';
+    let recipeIngredients: any = new FormArray([]);
+
+    if (this.editMode) {
+      const recipe = this.recipeService.getRecipe(this.id);
+      recipeName = recipe.name;
+      recipeImagePath = recipe.imagePath;
+      recipeDescription = recipe.description;
+      if (recipe['ingredients']) {
+        for (let i of recipe.ingredients) {
+          recipeIngredients.push(this.newIngredientCtrl(i));
+        }
+      }
+      this.recipeForm = new FormGroup({
+        name: new FormControl(recipeName),
+        description: new FormControl(recipeDescription),
+        imagePath: new FormControl(recipeImagePath),
+        ingredients: recipeIngredients,
+      });
     }
   }
-  onSaveItem(){
-    this.recipe = this.recipeService.getRecipe(this.id)
+  onSaveItem() {
+    this.recipe = this.recipeService.getRecipe(this.id);
     console.log(this.recipe);
+  }
+  onAddIngredients() {
+    (<FormArray>this.recipeForm.get('ingredients')).push(
+      new FormGroup({
+        name: new FormControl(),
+        amount: new FormControl(),
+      })
+    );
   }
   onSubmit() {
   }

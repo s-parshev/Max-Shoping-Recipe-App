@@ -18,15 +18,19 @@ import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.compone
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-const appRoute=[
-  {path:'shoping', component:ShopingComponent},
-  {path:'recipe', component:RecipeComponent, children:[
-    {path:'', component: RecipeStartComponent},
-    {path:'new', component:RecipeEditComponent},
-    {path:':id', component:RecipeDetailComponent},
-    {path:':id/edit', component:RecipeEditComponent},
-  ]},
-]
+const appRoute = [
+  { path: 'shoping', component: ShopingComponent },
+  {
+    path: 'recipe',
+    component: RecipeComponent,
+    children: [
+      { path: '', component: RecipeStartComponent },
+      { path: 'new', component: RecipeEditComponent },
+      { path: ':id', component: RecipeDetailComponent },
+      { path: ':id/edit', component: RecipeEditComponent },
+    ],
+  },
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +45,7 @@ const appRoute=[
     DropdownDirective,
     FontSize,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,6 @@ const appRoute=[
     RouterModule.forRoot(appRoute),
   ],
   providers: [ShopingServices],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
